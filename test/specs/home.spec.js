@@ -28,7 +28,10 @@ describe('Wikipedia home page',  () => {
     it('should find second tallest building and verify height is correctly converted', () => {
         expect(homePage.secondTallestName.getText()).toEqual("Shanghai Tower")
         expect(homePage.secondTallestHeightFt.getText()).toEqual('2,073\xA0ft')
-        expect(homePage.secondTallestHeightMeter.getText()).toEqual("632 m")  
+        expect(homePage.secondTallestHeightMeter.getText()).toEqual("632 m") 
+        const heightFt = parseInt(homePage.secondTallestHeightFt.getText().replace(/,/g, ''))
+        const heightMeter = parseFloat(homePage.secondTallestHeightMeter.getText())
+        expect(heightFt).toEqual(parseInt(heightMeter*3.2808))
     })    
 
     it('should sort table in descending order by year and find Empire state building as first result', () => {
